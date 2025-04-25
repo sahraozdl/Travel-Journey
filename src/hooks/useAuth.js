@@ -4,7 +4,7 @@ import { setDoc, doc } from "firebase/firestore";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext.jsx";
 
-export function useAuth() {
+export const useAuth = () => {
   return useContext(UserContext);
 }
 
@@ -14,7 +14,7 @@ export async function signUpUser(email, password,username) {
 
   await setDoc(doc(db, "users", user.uid), {
     id: user.uid,
-    name: username || "Anonymous",
+    name: user.username || "Anonymous",
     email: user.email,
     addedTrip: [],
     addedTripCount: 0,
