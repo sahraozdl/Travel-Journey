@@ -1,7 +1,15 @@
+//src/pages/UserPage/index.jsx
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { db } from "../../config/firebase";
-import { doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
 export default function UserPage() {
   const user = useAuth();
@@ -29,7 +37,10 @@ export default function UserPage() {
         where("likedBy", "array-contains", user.id)
       );
       const querySnapshot = await getDocs(q);
-      const trips = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const trips = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setLikedTrips(trips);
     };
 
@@ -40,7 +51,10 @@ export default function UserPage() {
         where("savedBy", "array-contains", user.id)
       );
       const querySnapshot = await getDocs(q);
-      const trips = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const trips = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setSavedTrips(trips);
     };
 
@@ -71,11 +85,15 @@ export default function UserPage() {
 
       {/* Tabs */}
       <div className="flex justify-around border-b mb-4">
-        {["liked", "saved", "settings"].map(tab => (
+        {["liked", "saved", "settings"].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`py-2 px-4 border-b-2 ${activeTab === tab ? "border-blue-600 text-blue-600" : "border-transparent text-gray-500"}`}
+            className={`py-2 px-4 border-b-2 ${
+              activeTab === tab
+                ? "border-blue-600 text-blue-600"
+                : "border-transparent text-gray-500"
+            }`}
           >
             {tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
