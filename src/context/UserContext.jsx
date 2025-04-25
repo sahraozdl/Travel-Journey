@@ -77,7 +77,7 @@ export const UserProvider = ({ children }) => {
               payload: {
                 id: authUser.uid,
                 email: authUser.email,
-                name: userData.name || authUser.displayName,
+                name: userData.name || authUser.name,
                 addedTrip: userData.addedTrip || [],
                 savedTrips: userData.savedTrips || [],
                 favoriteTrip: userData.favoriteTrip || [],

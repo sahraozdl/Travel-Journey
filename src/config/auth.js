@@ -20,7 +20,7 @@ export async function signUpUser(email, password) {
   await setDoc(doc(db, "users", user.uid), {
     id: user.uid,
     email: user.email,
-    name: user.displayName || "Anonymous",
+    name: user.name || "Anonymous",
     addedTrip: [],
     addedTripCount: 0,
     savedTrips: [],
