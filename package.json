@@ -21,6 +21,8 @@
     "url": "https://github.com/sahraozdl/Travel-Journey/issues"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@react-google-maps/api": "^2.20.6",
     "firebase": "^11.6.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

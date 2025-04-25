@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useAuth } from "../../hooks/useAuth";
+import { BookmarkIcon as SaveIcon } from "@heroicons/react/24/outline";
+import { BookmarkIcon as UnsaveIcon } from "@heroicons/react/24/solid";
 
 const SaveButton = ({ id }) => {
   const { user } = useAuth();
@@ -62,7 +64,7 @@ const SaveButton = ({ id }) => {
 
   return (
     <>
-      <button onClick={toggleSave}>{isSaved ? "Unsave" : "Save"}</button>
+      <button onClick={toggleSave}>{isSaved ? <UnsaveIcon className="h-6 w-6 text-yellow-700"/> : <SaveIcon className="h-6 w-6 text-yellow-700" />}</button>
       {userMessage && <p className="text-red-800 text-base">{userMessage}</p>}
     </>
   );

@@ -5,6 +5,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { NavLink, useNavigate } from "react-router";
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
+import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/solid";
 
 function Header() {
   const { user, loading } = useAuth();
@@ -29,15 +30,15 @@ function Header() {
 
   return (
     <header className="header">
-      <NavLink to="/" className="header-logo-link" end>
-        <img src="/images/Globe.png" alt="Globe icon" className="header-logo" />
-        <span className="header-title">my travel journal.</span>
+      <NavLink to="/" className="flex flex-row gap-2 items-center" end>
+        <GlobeAsiaAustraliaIcon className="text-white h-12 w-12"/>
+        <span className="text-xl font-bold">my travel journal.</span>
       </NavLink>
-      <nav className="header-nav">
-        <ul className="header-nav-list">
+      <nav>
+        <ul className="flex flex-row gap-6">
           {!user?.id ? (
             <li>
-              <NavLink to="/user/login" className="nav-btn" end>
+              <NavLink to="/user/login" className="nav-btn justify-end" end>
                 Login
               </NavLink>
             </li>
@@ -49,17 +50,18 @@ function Header() {
                 </NavLink>
               </li>
               <li>
-                <button className="header-nav-button" onClick={handleLogout}>
+                {/*I will remove it to the settings later no need styling*/}
+                <button className="nav-btn" onClick={handleLogout}>
                   Logout
                 </button>
               </li>
             </>
           )}
         </ul>
+        {userLoggedOutMessage && (
+      <p className="logout-message">{userLoggedOutMessage}</p>
+    )}
       </nav>
-      {userLoggedOutMessage && (
-        <p className="logout-message">{userLoggedOutMessage}</p>
-      )}
     </header>
   );
 }
