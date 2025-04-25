@@ -3,46 +3,19 @@
 @tailwind utilities;
 
 @layer components{
-  .journal-entry {
-    @apply flex mb-9;
-  }
-  .marker {
-    @apply w-2.5 mr-1;
-  }
   .main-image-container {
     @apply w-32 h-40 overflow-hidden rounded-lg flex-shrink-0 mr-5;
   }
   .main-image {
     @apply h-full w-full object-cover;
   }
-  .info-container span.country {
-    @apply uppercase text-xs mr-3;
-  }
-  .info-container a {
-    @apply text-[#2B283A] text-xs;
-  }
-  .info-container a:visited {
-    @apply text-[#918E9B];
-  }
-  .info-container h2.entry-title {
-    @apply mt-2 mb-4;
-  }
-  .info-container p.trip-dates {
-    @apply font-bold;
-  }
-  .info-container p.entry-text {
-    @apply leading-6 text-sm line-clamp-3 overflow-hidden;
-  }
-  .info-container p.entry-text::after {
-    content: '...';
-  }
   .header {
-    @apply bg-[#F55A5A] text-white flex justify-center items-center min-h-[70px] gap-2;
+    @apply bg-red-900 text-white flex flex-row justify-between px-5 items-center min-h-[70px] gap-2;
   }
-  .header-logo {
-    @apply w-6 h-6;
+  .nav-btn {
+    @apply text-white font-bold text-lg hover:border-b-2 m-0 h-6 w-16
   }
-  .header-title {
-    @apply text-base font-medium leading-5;
+  .logout-message {
+    @apply text-red-950 font-normal text-sm m-0 block
   }
 }

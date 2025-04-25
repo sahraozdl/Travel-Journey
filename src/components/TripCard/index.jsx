@@ -2,12 +2,13 @@
 import { useAuth } from "../../hooks/useAuth";
 import SaveButton from "./SaveButton";
 import LikeButton from "./LikeButton";
+import { MapPinIcon } from "@heroicons/react/20/solid";
 
 export default function TripCard({ entry }) {
   const user = useAuth();
 
   return (
-    <article className="journal-entry">
+    <article className="flex flex-row justify-stretch p-4">
       <div className="main-image-container">
         <img
           className="main-image"
@@ -16,33 +17,38 @@ export default function TripCard({ entry }) {
         />
       </div>
 
-      <div className="info-container">
-        <img
-          className="marker"
-          src="../images/marker.png"
-          alt="map marker icon"
-        />
-        <span className="country">{entry.country}</span>
+      <div className="info-container w-full">
+      <span className="uppercase text-gray-700 text-xs mr-3 flex flex-row items-center gap-1">
+        {entry.country}
+        <MapPinIcon className="h-4 w-4 text-red-900" />
         <a
+          className="lowercase underline text-gray-400 visited:text-gray-600 px-4"
           href={entry.googleMapsLink}
           target="_blank"
           rel="noopener noreferrer"
         >
+          {/*have to style lowercase find how to style find later*/}
           View on Google Maps
-        </a>
-        <h2 className="entry-title">{entry.title}</h2>
-        <p className="trip-dates">{entry.dates}</p>
-        <p className="entry-text">{entry.text}</p>
+        </a></span>
+        <span className="flex flex-row items-center gap-6 py-2 justify-between">
+        <h2 className="font-bold text-lg">{entry.title}</h2>
+        <p className="font-light text-xs px-4">{entry.dates}</p>
+        </span>
+        <p className="py-4 leading-6">{entry.text}</p>
+
+        <div className="flex flex-row-reverse">
+        {[
+          { Button: SaveButton, count: entry.savedBy?.length || 0 },
+          { Button: LikeButton, count: entry.likedBy?.length || 0 },
+        ].map(({ Button, count }, index) => (
+          <span key={index} className="flex flex-row">
+            <Button user={user} id={entry.id} />
+            <p className="text-gray-600">{count}</p>
+          </span>
+        ))}
       </div>
 
-      <div className="button-row">
-        <SaveButton user={user} id={entry.id} />
-        <LikeButton user={user} id={entry.id} />
       </div>
-
-      <p>
-        {entry.savedBy?.length || 0} saved • {entry.likedBy?.length || 0} liked
-      </p>
     </article>
   );
 }

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useAuth } from "../../hooks/useAuth";
+import { HeartIcon as UnlikeHeart} from "@heroicons/react/24/outline";
+import { HeartIcon as LikeHeart } from "@heroicons/react/24/solid";
 
 const LikeButton = ({ id }) => {
   const { user } = useAuth();
@@ -68,7 +70,7 @@ const LikeButton = ({ id }) => {
 
   return (
     <>
-      <button onClick={toggleLike}>{isLiked ? "💖 Unlike" : "🤍 Like"}</button>
+      <button onClick={toggleLike}>{isLiked ? <LikeHeart className="h-6 w-6 text-red-900"/> : <UnlikeHeart className="h-6 w-6 text-red-900"/>}</button>
       {userMessage && <p className="text-red-800 text-base">{userMessage}</p>}
     </>
   );
