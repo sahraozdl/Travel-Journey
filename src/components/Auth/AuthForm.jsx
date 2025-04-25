@@ -31,47 +31,55 @@ export function AuthForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <h2 className="text-xl font-bold mb-4">{isSignUp ? "Sign Up" : "Sign In"}</h2>
+    <form onSubmit={handleSubmit} className="">
+      <h2 className="text-xl font-bold mb-4 text-center">{isSignUp ? "Sign Up" : "Sign In"}</h2>
       {isSignUp && (
+        <>
+        <label htmlFor="username" className="">Username:</label>
         <input
+          id="username"
           type="text"
           placeholder="Username"
-          className="w-full border px-4 py-2 rounded"
+          className="w-full border px-4 py-2 my-2 rounded"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
+        </>
       )}
+      <label htmlFor="email">Email:</label>
       <input
+        id="email"
         type="email"
         placeholder="Email"
-        className="w-full border px-4 py-2 rounded"
+        className="w-full border px-4 py-2 my-2 rounded"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+      <label htmlFor="password">Password:</label>
       <input
+      id="password"
         type="password"
         placeholder="Password"
-        className="w-full border px-4 py-2 rounded"
+        className="w-full border px-4 py-2 my-2 rounded"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        className="w-full my-4 bg-red-500 text-white py-2 rounded hover:bg-red-700"
       >
         {isSignUp ? "Create Account" : "Login"}
       </button>
 
-      {successMessage && <p className="text-green-600">{successMessage}</p>}
+      {successMessage && <p className="text-yellow-700">{successMessage}</p>}
       {errorMessage && <p className="text-red-600">{errorMessage}</p>}
 
       <p className="text-sm text-center">
         {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
         <span
           onClick={() => setIsSignUp(!isSignUp)}
-          className="text-blue-500 cursor-pointer"
+          className="text-red-500 cursor-pointer"
         >
           {isSignUp ? "Sign In" : "Sign Up"}
         </span>

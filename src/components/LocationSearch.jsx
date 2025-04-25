@@ -14,7 +14,9 @@ const LocationSearch = ({ onPlaceSelected }) => {
         return;
       }
 
-      const autocomplete = new window.google.maps.places.Autocomplete(containerRef.current);
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        containerRef.current
+      );
 
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
@@ -36,12 +38,12 @@ const LocationSearch = ({ onPlaceSelected }) => {
   }, [onPlaceSelected]);
 
   return (
-    <div>
+    <div className="w-1/2 ">
       <input
         ref={containerRef}
         type="text"
         placeholder="Search for a location"
-        className="p-2 border rounded"
+        className="input w-full"
       />
     </div>
   );

@@ -18,4 +18,10 @@
   .logout-message {
     @apply text-red-950 font-normal text-sm m-0 block
   }
+  .input{
+    @apply w-1/2 p-2  border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-900
+  }
+  .label {
+    @apply p-2 mr-2 font-semibold min-w-12 
+  }
 }
