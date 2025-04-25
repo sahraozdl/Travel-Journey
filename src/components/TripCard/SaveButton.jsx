@@ -1,3 +1,4 @@
+//src/components/TripCard/SaveButton.jsx
 import { saveTrip, unsaveTrip } from "../../utils/firebaseActions";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
@@ -34,8 +35,6 @@ const SaveButton = ({ id }) => {
     if (!user || !user.id) {
       console.error("User is not logged in or User ID is missing");
       setUserMessage("Please log in to save this trip.");
-      console.log("User in toggleSave:", user);
-      console.log("Entry ID in toggleSave:", id);
       setTimeout(() => {
         setUserMessage("");
       }, 3000); // Clear message after 3 seconds
@@ -54,8 +53,6 @@ const SaveButton = ({ id }) => {
       setIsSaved((prevState) => !prevState); // Toggle the saved state
     } catch (err) {
       console.error("Error toggling save:", err.message);
-      console.log("User in (ifissaved) toggleSave:", user);
-      console.log("Entry ID (ifissaved) in toggleSave:", id);
       setUserMessage("Error toggling like. Please try again.");
       setTimeout(() => {
         setUserMessage("");

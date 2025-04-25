@@ -1,4 +1,8 @@
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+//src/hooks/useAuth.js
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { auth, db } from "../config/firebase.js";
 import { setDoc, doc } from "firebase/firestore";
 import { useContext } from "react";
@@ -6,10 +10,14 @@ import { UserContext } from "../context/UserContext.jsx";
 
 export const useAuth = () => {
   return useContext(UserContext);
-}
+};
 
-export async function signUpUser(email, password,username) {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+export async function signUpUser(email, password, username) {
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
   const user = userCredential.user;
 
   await setDoc(doc(db, "users", user.uid), {
@@ -29,7 +37,11 @@ export async function signUpUser(email, password,username) {
 }
 
 export async function signInUser(email, password) {
-  const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
   const user = userCredential.user;
   return { id: user.uid, email: user.email };
 }

@@ -6,9 +6,7 @@ function App() {
   return (
     <Router>
       <Header />
-      
-        <AppRouter />
-      
+      <AppRouter />
     </Router>
   );
 }

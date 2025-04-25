@@ -1,3 +1,4 @@
+//src/components/TripCard/LikeButton.jsx
 import { likeTrip, unlikeTrip } from "../../utils/firebaseActions";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
@@ -38,8 +39,6 @@ const LikeButton = ({ id }) => {
     if (!user || !user.id) {
       console.error("User is not logged in or User ID is missing");
       setUserMessage("Please log in to like this trip.");
-      console.log("User in toggleLike:", user);
-      console.log("Entry ID in toggleLike:", id);
       setTimeout(() => {
         setUserMessage("");
       }, 3000);
@@ -60,9 +59,6 @@ const LikeButton = ({ id }) => {
       setIsLiked((prevState) => !prevState);
     } catch (err) {
       console.error("Error toggling like:", err.message);
-      console.log("User in  (ifisliked) toogleLike:", user);
-      console.log("Entry ID in (ifisliked) toogleLike:", id);
-
       setUserMessage("Error toggling like. Please try again.");
       setTimeout(() => {
         setUserMessage("");

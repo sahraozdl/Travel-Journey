@@ -1,14 +1,14 @@
+//src/components/Header/index.jsx
 import React from "react";
-import { useState, useContext } from "react";
-import { useAuth } from  "../../hooks/useAuth";
-import { NavLink,useNavigate } from "react-router";
+import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { NavLink, useNavigate } from "react-router";
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
-import { UserDispatchContext,UserActionTypes } from "../../context/UserContext"; // not sure
 
 function Header() {
-  const { user, loading, dispatch } = useAuth();
-  const navigate = useNavigate();
+  const { user, loading } = useAuth();
+  const navigate = useNavigate(); //not sure if this is needed
   const [userLoggedOutMessage, setUserLoggedOutMessage] = useState("");
 
   const handleLogout = async () => {
@@ -24,17 +24,18 @@ function Header() {
     }
   };
   if (loading) {
-    return <div>Loading...</div>; // Optional: show a loading spinner while the auth check is happening
+    return <div>Loading...</div>; // change this to something else later
   }
 
   return (
     <header className="header">
       <NavLink to="/" className="header-logo-link" end>
-      <img src="/images/Globe.png" alt="Globe icon" className="header-logo" />
-      <span className="header-title">my travel journal.</span>
+        <img src="/images/Globe.png" alt="Globe icon" className="header-logo" />
+        <span className="header-title">my travel journal.</span>
       </NavLink>
       <nav className="header-nav">
-        <ul className="header-nav-list">{!user?.id ? (
+        <ul className="header-nav-list">
+          {!user?.id ? (
             <li>
               <NavLink to="/user/login" className="nav-btn" end>
                 Login
@@ -48,10 +49,7 @@ function Header() {
                 </NavLink>
               </li>
               <li>
-                <button
-                  className="header-nav-button"
-                  onClick={handleLogout}
-                >
+                <button className="header-nav-button" onClick={handleLogout}>
                   Logout
                 </button>
               </li>

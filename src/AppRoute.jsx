@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router";
 import { Login } from "./components/Auth/Login";
 import TravelList from "./pages/TravelList";
 import { Home } from "./pages/Home";
-import UserPage from "./pages/UserPage"; // make sure this path matches your folder
+import UserPage from "./pages/UserPage";
 
 export const AppRouter = () => {
   return (
