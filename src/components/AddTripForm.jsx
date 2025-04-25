@@ -11,6 +11,7 @@ import {
 import { useAuth } from "../hooks/useAuth";
 import LocationSearch from "./LocationSearch";
 import { useNavigate } from "react-router";
+import { MapPinIcon } from "@heroicons/react/24/solid";
 
 export default function AddTripForm({ onTripAdded }) {
   const { user: currentUser } = useAuth();
@@ -19,7 +20,7 @@ export default function AddTripForm({ onTripAdded }) {
   const [locationLink, setLocationLink] = useState("");
   const navigate = useNavigate();
   const handlePlaceSelected = (mapUrl) => {
-    setLocationLink(mapUrl); // already a string now
+    setLocationLink(mapUrl);
   };
 
   const handleSubmit = async (e) => {
@@ -38,7 +39,7 @@ export default function AddTripForm({ onTripAdded }) {
       });
 
       await updateDoc(newTripRef, {
-        id: newTripRef.id,  // This assigns the Firestore-generated document ID to the `id` field in the document
+        id: newTripRef.id, //to add added trips a id as doc.uid
       });
 
       const userRef = doc(db, "users", currentUser.id);
@@ -59,19 +60,64 @@ export default function AddTripForm({ onTripAdded }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input name="title" placeholder="Trip Title" required />
-      <input name="country" placeholder="Country" required />
-      <input name="dates" placeholder="12 Jan - 18 Jan, 2025" required />
-      <textarea name="text" placeholder="Description" required />
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      <span className="flex flex-row items-center justify-between">
+        <label htmlFor="country" className="label">
+          Country:
+        </label>
+        <input
+          id="country"
+          name="country"
+          placeholder="Country"
+          className="input"
+          required
+        />
+        <MapPinIcon className="h-10 w-16 text-red-900 px-2" />
+        {/* search input style later */}
+        <LocationSearch onPlaceSelected={handlePlaceSelected} />
+      </span>
+      <span className="flex flex-row items-center justify-stretch">
+        <label htmlFor="title" className="label">
+          Title:
+        </label>
+        <input
+          id="title"
+          name="title"
+          placeholder="Trip Title"
+          className="input"
+          required
+        />
+        <label htmlFor="dates" className="label">
+          Dates:
+        </label>
+        <input
+          id="dates"
+          name="dates"
+          placeholder="12 Jan - 18 Jan, 2025"
+          className="input"
+          required
+        />
+      </span>
+      <label className="label" htmlFor="description">
+        Description:
+      </label>
+      <textarea
+        id="description"
+        name="text"
+        placeholder="Description"
+        className="input w-full h-36"
+        required
+      />
 
-      {/* search input style later */}
-      <LocationSearch onPlaceSelected={handlePlaceSelected} />
-
-      <button type="submit" className="bg-red-500 text-white px-4 py-2 rounded">
+      <button
+        type="submit"
+        className="bg-red-500 text-white px-4 py-2 my-4 rounded hover:bg-red-900 "
+      >
         {loading ? "Adding..." : "Add Trip"}
       </button>
-      {userMessage && <p>{userMessage}</p>}
+      {userMessage && (
+        <p className="text-red-700 font-normal text-base">{userMessage}</p>
+      )}
     </form>
   );
 }
