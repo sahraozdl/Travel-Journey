@@ -2,69 +2,78 @@ import { likeTrip, unlikeTrip } from "../../utils/firebaseActions";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { useAuth } from "../../hooks/useAuth";
 
-const LikeButton = ({ user, trip }) => {
+const LikeButton = ({ id }) => {
+  const { user } = useAuth();
   const [isLiked, setIsLiked] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
   const [userMessage, setUserMessage] = useState("");
 
-  // Check if the user already liked the trip
   useEffect(() => {
-    if (!user) {
-      setIsUserLoggedIn(false); // Not logged in
-      return;
-    }
-
     const checkIfLiked = async () => {
-      if (user && trip?.id) {
-        const tripRef = doc(db, "travelEntries", trip.id);
+      if (!user || !user.id || !id) return;
+      try {
+        const tripRef = doc(db, "travelEntries", id);
         const tripSnap = await getDoc(tripRef);
         if (tripSnap.exists()) {
           const likedBy = tripSnap.data().likedBy || [];
-          setIsLiked(likedBy.includes(user.uid));
+          setIsLiked(likedBy.includes(user.id));
         }
+      } catch (err) {
+        console.error("Error checking liked status:", err.message);
+
+        console.log("User:", user);
+        console.log("Entry ID:", id);
+
+        setUserMessage("Error checking liked status. Please try again.");
+        setTimeout(() => {
+          setUserMessage("");
+        }, 3000);
       }
     };
-
     checkIfLiked();
-  }, [user, trip]);
+  }, [user, id]);
 
   const toggleLike = async () => {
-    if (!user) {
-      // If user isn't logged in, show a message
+    if (!user || !user.id) {
+      console.error("User is not logged in or User ID is missing");
       setUserMessage("Please log in to like this trip.");
+      console.log("User in toggleLike:", user);
+      console.log("Entry ID in toggleLike:", id);
       setTimeout(() => {
         setUserMessage("");
-      }, 3000); // Clear message after 3 seconds
+      }, 3000);
       return;
     }
+
+    if (!id) {
+      setUserMessage("Trip not found.");
+      return;
+    }
+
     try {
       if (isLiked) {
-        await unlikeTrip(user.uid, trip.id);
-        setIsLiked(false);
+        await unlikeTrip(user, id);
       } else {
-        await likeTrip(user.uid, trip.id);
-        setIsLiked(true);
+        await likeTrip(user, id);
       }
+      setIsLiked((prevState) => !prevState);
     } catch (err) {
       console.error("Error toggling like:", err.message);
+      console.log("User in  (ifisliked) toogleLike:", user);
+      console.log("Entry ID in (ifisliked) toogleLike:", id);
+
       setUserMessage("Error toggling like. Please try again.");
       setTimeout(() => {
         setUserMessage("");
-      }, 3000); // Clear message after 3 seconds
+      }, 3000);
     }
   };
 
   return (
     <>
-    <button onClick={toggleLike}>
-      {isLiked ? "💖 Unlike" : "🤍 Like"}
-    </button>
-    {!isUserLoggedIn && (
-      <p className="text-red-800 text-base">
-       {userMessage}
-      </p>
-    )}
+      <button onClick={toggleLike}>{isLiked ? "💖 Unlike" : "🤍 Like"}</button>
+      {userMessage && <p className="text-red-800 text-base">{userMessage}</p>}
     </>
   );
 };

@@ -17,9 +17,17 @@ export default function TripCard({ entry }) {
       </div>
 
       <div className="info-container">
-        <img className="marker" src="../images/marker.png" alt="map marker icon" />
+        <img
+          className="marker"
+          src="../images/marker.png"
+          alt="map marker icon"
+        />
         <span className="country">{entry.country}</span>
-        <a href={entry.googleMapsLink} target="_blank" rel="noopener noreferrer">
+        <a
+          href={entry.googleMapsLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           View on Google Maps
         </a>
         <h2 className="entry-title">{entry.title}</h2>
@@ -28,11 +36,13 @@ export default function TripCard({ entry }) {
       </div>
 
       <div className="button-row">
-        <SaveButton user={user} tripId={entry.id} />
-        <LikeButton user={user} tripId={entry.id} />
+        <SaveButton user={user} id={entry.id} />
+        <LikeButton user={user} id={entry.id} />
       </div>
 
-      <p>{entry.savedBy?.length || 0} saved • {entry.likedBy?.length || 0} liked</p>
+      <p>
+        {entry.savedBy?.length || 0} saved • {entry.likedBy?.length || 0} liked
+      </p>
     </article>
   );
 }
