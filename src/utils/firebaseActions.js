@@ -1,4 +1,3 @@
-// src/utils/firebaseActions.js
 import { db } from "../config/firebase.js";
 import {
   doc,
@@ -8,7 +7,6 @@ import {
   getDoc,
 } from "firebase/firestore";
 
-// Save a trip to the user's savedTrips
 export async function saveTrip(user, id) {
   const userRef = doc(db, "users", user.id);
   const tripRef = doc(db, "travelEntries", id);
@@ -29,7 +27,6 @@ export async function saveTrip(user, id) {
   }
 }
 
-// Unsave a trip
 export async function unsaveTrip(user, id) {
   const userRef = doc(db, "users", user.id);
   const tripRef = doc(db, "travelEntries", id);
@@ -53,7 +50,6 @@ export async function unsaveTrip(user, id) {
   }
 }
 
-// Like a trip
 export async function likeTrip(user, id) {
   const userRef = doc(db, "users", user.id);
   const tripRef = doc(db, "travelEntries", id);
@@ -75,7 +71,6 @@ export async function likeTrip(user, id) {
   }
 }
 
-// Unlike a trip
 export async function unlikeTrip(user, id) {
   const userRef = doc(db, "users", user.id);
   const tripRef = doc(db, "travelEntries", id);

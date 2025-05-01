@@ -1,4 +1,3 @@
-// src/components/LocationSearch.jsx
 import React, { useRef, useEffect } from "react";
 import { useLoadGoogleMaps } from "./useLoadGoogleMaps";
 

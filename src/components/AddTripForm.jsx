@@ -1,4 +1,3 @@
-// src/components/AddTripForm.jsx
 import { useState } from "react";
 import { db } from "../config/firebase";
 import {
@@ -39,7 +38,7 @@ export default function AddTripForm({ onTripAdded }) {
       });
 
       await updateDoc(newTripRef, {
-        id: newTripRef.id, //to add added trips a id as doc.uid
+        id: newTripRef.id,
       });
 
       const userRef = doc(db, "users", currentUser.id);
@@ -49,7 +48,6 @@ export default function AddTripForm({ onTripAdded }) {
 
       onTripAdded && onTripAdded({ id: newTripRef.id });
       setUserMessage("Trip added!");
-      //add nav to main travel list
       setTimeout(() => navigate("/"), 1500);
     } catch (error) {
       console.error("Error adding trip", error);

@@ -1,4 +1,3 @@
-//src/hooks/useAuth.js
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,

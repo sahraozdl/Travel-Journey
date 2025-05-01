@@ -1,4 +1,3 @@
-//src/components/Header/index.jsx
 import React from "react";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
@@ -9,7 +8,7 @@ import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/solid";
 
 function Header() {
   const { user, loading } = useAuth();
-  const navigate = useNavigate(); //not sure if this is needed
+  const navigate = useNavigate();
   const [userLoggedOutMessage, setUserLoggedOutMessage] = useState("");
 
   const handleLogout = async () => {
@@ -25,7 +24,7 @@ function Header() {
     }
   };
   if (loading) {
-    return <div>Loading...</div>; // change this to something else later
+    return <div>Loading...</div>;
   }
 
   return (

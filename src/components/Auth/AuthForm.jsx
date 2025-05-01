@@ -1,4 +1,3 @@
-// src/components/Auth/AuthForm.jsx
 import { useState } from "react";
 import { signInUser, signUpUser } from "../../config/auth";
 import { useNavigate } from "react-router";
@@ -24,7 +23,7 @@ export function AuthForm() {
         : await signInUser(email, password);
 
       setSuccessMessage(isSignUp ? "Account created!" : "Signed in!");
-      setTimeout(() => navigate("/"), 1000); // optional: redirect on success
+      setTimeout(() => navigate("/"), 1000);
     } catch (error) {
       setErrorMessage(error.message);
     }

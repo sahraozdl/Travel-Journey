@@ -1,4 +1,3 @@
-// src/components/TripCard/index.jsx
 import { useAuth } from "../../hooks/useAuth";
 import SaveButton from "./SaveButton";
 import LikeButton from "./LikeButton";

@@ -1,4 +1,3 @@
-// src/components/useLoadGoogleMaps.js =>but change file place later 
 import { useEffect } from "react";
 
 export function useLoadGoogleMaps() {

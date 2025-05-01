@@ -1,4 +1,3 @@
-// src/components/TripList/index.jsx
 export default function TripList({ trips, emptyMessage = "No trips found." }) {
   if (!trips || trips.length === 0) {
     return <p className="text-gray-500">{emptyMessage}</p>;
