@@ -85,7 +85,6 @@ export default function UserPage() {
         ))}
       </div>
 
-      {/* Tab content */}
       <div>
         {activeTab === "trips" && <UserTrips trips={userTrips} setTrips={setUserTrips} />}
         {activeTab === "liked" && <TripList trips={likedTrips} emptyMessage="No liked trips." />}

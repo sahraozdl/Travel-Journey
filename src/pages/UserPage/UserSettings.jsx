@@ -1,4 +1,3 @@
-// src/pages/UserPage/UserSettings.jsx
 export default function UserSettings() {
   return (
     <div className="p-4">

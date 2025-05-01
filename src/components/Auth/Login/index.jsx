@@ -1,4 +1,3 @@
-// src/components/Auth/Login/index.jsx
 import { useNavigate } from "react-router";
 import { AuthForm } from "../AuthForm";
 

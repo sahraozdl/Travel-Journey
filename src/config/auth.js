@@ -1,4 +1,3 @@
-//src/config/auth.js
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -7,7 +6,6 @@ import {
 import { auth, db } from "./firebase.js";
 import { doc, setDoc } from "firebase/firestore";
 
-// Sign Up Logic
 export async function signUpUser(email, password) {
   const userCredential = await createUserWithEmailAndPassword(
     auth,
@@ -16,7 +14,6 @@ export async function signUpUser(email, password) {
   );
   const user = userCredential.user;
 
-  // Save user to Firestore
   await setDoc(doc(db, "users", user.uid), {
     id: user.uid,
     email: user.email,
@@ -33,7 +30,6 @@ export async function signUpUser(email, password) {
   return user;
 }
 
-// Sign In Logic
 export async function signInUser(email, password) {
   const userCredential = await signInWithEmailAndPassword(
     auth,
@@ -43,7 +39,6 @@ export async function signInUser(email, password) {
   return userCredential.user;
 }
 
-// Sign Out Logic
 export function signOutUser() {
   return signOut(auth);
 }

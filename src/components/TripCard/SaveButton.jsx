@@ -1,4 +1,3 @@
-//src/components/TripCard/SaveButton.jsx
 import { saveTrip, unsaveTrip } from "../../utils/firebaseActions";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
@@ -27,7 +26,7 @@ const SaveButton = ({ id }) => {
         setUserMessage("Error checking saved status. Please try again.");
         setTimeout(() => {
           setUserMessage("");
-        }, 3000); // Clear message after 3 seconds
+        }, 3000);
       }
     };
     checkIfSaved();
@@ -39,7 +38,7 @@ const SaveButton = ({ id }) => {
       setUserMessage("Please log in to save this trip.");
       setTimeout(() => {
         setUserMessage("");
-      }, 3000); // Clear message after 3 seconds
+      }, 3000);
       return;
     }
     if (!id) {
@@ -52,13 +51,13 @@ const SaveButton = ({ id }) => {
       } else {
         await saveTrip(user, id);
       }
-      setIsSaved((prevState) => !prevState); // Toggle the saved state
+      setIsSaved((prevState) => !prevState);
     } catch (err) {
       console.error("Error toggling save:", err.message);
       setUserMessage("Error toggling like. Please try again.");
       setTimeout(() => {
         setUserMessage("");
-      }, 3000); // Clear message after 3 seconds
+      }, 3000); 
     }
   };
 

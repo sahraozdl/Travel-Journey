@@ -1,4 +1,3 @@
-//src/components/TripCard/LikeButton.jsx
 import { likeTrip, unlikeTrip } from "../../utils/firebaseActions";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";

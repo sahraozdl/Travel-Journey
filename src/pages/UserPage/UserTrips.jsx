@@ -1,4 +1,3 @@
-// src/pages/UserPage/UserTrips.jsx
 import { useState } from "react";
 import AddTripForm from "../../components/AddTripForm";
 import TripList from "../../components/TripList";
