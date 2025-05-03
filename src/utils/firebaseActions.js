@@ -39,7 +39,7 @@ export async function unsaveTrip(user, id) {
     const userSnap = await getDoc(userRef);
     const userData = userSnap.data();
     const updatedSavedTrips = (userData.savedTrips || []).filter(
-      (id) => id !== id
+      (tripId) => tripId !== id
     );
 
     await updateDoc(userRef, {
@@ -82,7 +82,7 @@ export async function unlikeTrip(user, id) {
     const userSnap = await getDoc(userRef);
     const userData = userSnap.data();
     const updatedFavoriteTrips = (userData.favoriteTrip || []).filter(
-      (id) => id !== id
+      (tripId) => tripId !== id
     );
     await updateDoc(userRef, {
       favoriteTrip: updatedFavoriteTrips,

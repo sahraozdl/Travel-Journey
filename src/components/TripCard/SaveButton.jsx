@@ -9,27 +9,28 @@ import { BookmarkIcon as UnsaveIcon } from "@heroicons/react/24/solid";
 const SaveButton = ({ id }) => {
   const { user } = useAuth();
   const [isSaved, setIsSaved] = useState(false);
+  const [saveCount, setSaveCount] = useState(0);
   const [userMessage, setUserMessage] = useState("");
 
   useEffect(() => {
-    const checkIfSaved = async () => {
-      if (!user || !user.id || !id) return;
+    const fetchSaveStatus = async () => {
+      if (!user || !id) return;
       try {
         const tripRef = doc(db, "travelEntries", id);
         const tripSnap = await getDoc(tripRef);
         if (tripSnap.exists()) {
-          const savedby = tripSnap.data().savedBy || [];
-          setIsSaved(savedby.includes(user.id));
+          const savedBy = tripSnap.data().savedBy || [];
+          setSaveCount(savedBy.length);
+          setIsSaved(savedBy.includes(user.id));
         }
       } catch (err) {
-        console.error("Error checking saved status:", err.message);
-        setUserMessage("Error checking saved status. Please try again.");
-        setTimeout(() => {
-          setUserMessage("");
-        }, 3000);
+        console.error("Error fetching save data:", err.message);
+        setUserMessage("Error fetching save status.");
+        setTimeout(() => setUserMessage(""), 3000);
       }
     };
-    checkIfSaved();
+
+    fetchSaveStatus();
   }, [user, id]);
 
   const toggleSave = async () => {
@@ -48,22 +49,24 @@ const SaveButton = ({ id }) => {
     try {
       if (isSaved) {
         await unsaveTrip(user, id);
+        setIsSaved(false);
+        setSaveCount((count) => count - 1);
       } else {
         await saveTrip(user, id);
+        setIsSaved(true);
+        setSaveCount((count) => count + 1);
       }
-      setIsSaved((prevState) => !prevState);
     } catch (err) {
       console.error("Error toggling save:", err.message);
-      setUserMessage("Error toggling like. Please try again.");
-      setTimeout(() => {
-        setUserMessage("");
-      }, 3000); 
+      setUserMessage("Failed to toggle save. Try again.");
+      setTimeout(() => setUserMessage(""), 3000);
     }
   };
 
   return (
     <>
       <button onClick={toggleSave}>{isSaved ? <UnsaveIcon className="h-6 w-6 text-yellow-700"/> : <SaveIcon className="h-6 w-6 text-yellow-700" />}</button>
+      <p className="text-gray-600 text-sm">{saveCount}</p>
       {userMessage && <p className="text-red-800 text-base">{userMessage}</p>}
     </>
   );

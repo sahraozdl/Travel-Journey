@@ -6,26 +6,6 @@ import { MapPinIcon } from "@heroicons/react/20/solid";
 export default function TripCard({ entry }) {
   const user = useAuth();
 
-  const [likeCount, setLikeCount] = useState(entry.likedBy?.length || 0);
-  const [saveCount, setSaveCount] = useState(entry.savedBy?.length || 0);
-
-  // Update like count when the user likes/unlikes
-  const updateLikeCount = (newCount) => {
-    setLikeCount(newCount);
-  };
-
-  // Update save count when the user saves/unsaves
-  const updateSaveCount = (newCount) => {
-    setSaveCount(newCount);
-  };
-
-  useEffect(() => {
-    // Optional: Re-fetch or sync the like and save count on component mount (if needed).
-    // We assume the `entry` prop contains the updated counts when the component is loaded
-    setLikeCount(entry.likedBy?.length || 0);
-    setSaveCount(entry.savedBy?.length || 0);
-  }, [entry]);
-
   return (
     <article className="flex flex-row justify-stretch p-4">
       <div className="main-image-container">
@@ -56,15 +36,9 @@ export default function TripCard({ entry }) {
         <p className="py-4 leading-6">{entry.text}</p>
 
         <div className="flex flex-row-reverse">
-          {[{ Button: SaveButton, count: saveCount, updateCount: updateSaveCount }, 
-            { Button: LikeButton, count: likeCount, updateCount: updateLikeCount }]
-            .map(({ Button, count, updateCount }, index) => (
-          <span key={index} className="flex flex-row">
-            <Button user={user} id={entry.id} onUpdateCount={updateCount}/>
-            <p className="text-gray-600">{count}</p>
-          </span>
-        ))}
-      </div>
+  <SaveButton user={user} id={entry.id} />
+  <LikeButton user={user} id={entry.id} />
+</div>
 
       </div>
     </article>
