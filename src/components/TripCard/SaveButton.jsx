@@ -42,19 +42,19 @@ const SaveButton = ({ id }) => {
       }, 3000);
       return;
     }
+
     if (!id) {
       setUserMessage("Trip not found.");
       return;
     }
+
     try {
       if (isSaved) {
         await unsaveTrip(user, id);
         setIsSaved(false);
-        setSaveCount((count) => count - 1);
       } else {
         await saveTrip(user, id);
         setIsSaved(true);
-        setSaveCount((count) => count + 1);
       }
     } catch (err) {
       console.error("Error toggling save:", err.message);
@@ -65,10 +65,17 @@ const SaveButton = ({ id }) => {
 
   return (
     <>
-      <button onClick={toggleSave}>{isSaved ? <UnsaveIcon className="h-6 w-6 text-yellow-700"/> : <SaveIcon className="h-6 w-6 text-yellow-700" />}</button>
+      <button onClick={toggleSave}>
+        {isSaved ? (
+          <UnsaveIcon className="h-6 w-6 text-yellow-700" />
+        ) : (
+          <SaveIcon className="h-6 w-6 text-yellow-700" />
+        )}
+      </button>
       <p className="text-gray-600 text-sm">{saveCount}</p>
       {userMessage && <p className="text-red-800 text-base">{userMessage}</p>}
     </>
   );
 };
+
 export default SaveButton;
