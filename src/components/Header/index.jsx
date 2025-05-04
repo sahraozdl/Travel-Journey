@@ -14,6 +14,7 @@ function Header() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
+      navigate("/");
       setUserLoggedOutMessage("User logged out successfully.");
       setTimeout(() => {
         setUserLoggedOutMessage("");
