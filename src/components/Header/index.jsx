@@ -13,8 +13,8 @@ function Header() {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
       navigate("/");
+      await signOut(auth);
       setUserLoggedOutMessage("User logged out successfully.");
       setTimeout(() => {
         setUserLoggedOutMessage("");
