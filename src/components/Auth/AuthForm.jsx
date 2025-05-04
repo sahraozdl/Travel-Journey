@@ -19,7 +19,7 @@ export function AuthForm() {
 
     try {
       const user = isSignUp
-        ? await signUpUser(email, password,username)
+        ? await signUpUser(email, password, username)
         : await signInUser(email, password);
 
       setSuccessMessage(isSignUp ? "Account created!" : "Signed in!");
@@ -31,19 +31,23 @@ export function AuthForm() {
 
   return (
     <form onSubmit={handleSubmit} className="">
-      <h2 className="text-xl font-bold mb-4 text-center">{isSignUp ? "Sign Up" : "Sign In"}</h2>
+      <h2 className="text-xl font-bold mb-4 text-center">
+        {isSignUp ? "Sign Up" : "Sign In"}
+      </h2>
       {isSignUp && (
         <>
-        <label htmlFor="username" className="">Username:</label>
-        <input
-          id="username"
-          type="text"
-          placeholder="Username"
-          className="w-full border px-4 py-2 my-2 rounded"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
+          <label htmlFor="username" className="">
+            Username:
+          </label>
+          <input
+            id="username"
+            type="text"
+            placeholder="Username"
+            className="w-full border px-4 py-2 my-2 rounded"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
         </>
       )}
       <label htmlFor="email">Email:</label>
@@ -57,7 +61,7 @@ export function AuthForm() {
       />
       <label htmlFor="password">Password:</label>
       <input
-      id="password"
+        id="password"
         type="password"
         placeholder="Password"
         className="w-full border px-4 py-2 my-2 rounded"

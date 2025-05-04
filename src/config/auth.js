@@ -6,7 +6,7 @@ import {
 import { auth, db } from "./firebase.js";
 import { doc, setDoc } from "firebase/firestore";
 
-export async function signUpUser(email, password) {
+export async function signUpUser(email, password,username) {
   const userCredential = await createUserWithEmailAndPassword(
     auth,
     email,
@@ -17,7 +17,7 @@ export async function signUpUser(email, password) {
   await setDoc(doc(db, "users", user.uid), {
     id: user.uid,
     email: user.email,
-    name: user.name || "Anonymous",
+    name: username || "Anonymous",
     addedTrip: [],
     addedTripCount: 0,
     savedTrips: [],
