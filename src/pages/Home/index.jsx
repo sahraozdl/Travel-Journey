@@ -27,7 +27,11 @@ export const Home = () => {
 
   return (
     <div className="home">
-      {loading ? <p>Loading...</p> : <TravelList entries={entries} />}
+      {/* You pass travel entried down to TravelList component but don't use it there as a prop and inatead do another API call. 
+      I think you don't actually need to keep Home and TravelList as separate components - merge them into one.
+      */}
+      {loading ? <p>Loading...</p> : 
+      <TravelList entries={entries} />}
     </div>
   );
 };

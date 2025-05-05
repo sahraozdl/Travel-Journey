@@ -72,6 +72,7 @@ const SaveButton = ({ id }) => {
           <SaveIcon className="h-6 w-6 text-yellow-700" />
         )}
       </button>
+      {/* Move the count inside the button, it will look and work better this way since the icon and count are connected to each other. */}
       <p className="text-gray-600 text-sm">{saveCount}</p>
       {userMessage && <p className="text-red-800 text-base">{userMessage}</p>}
     </>

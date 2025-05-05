@@ -13,18 +13,21 @@ function Header() {
 
   const handleLogout = async () => {
     try {
-      navigate("/");
+      // First, do the sign out, show the success message and only then redirect the user
       await signOut(auth);
       setUserLoggedOutMessage("User logged out successfully.");
       setTimeout(() => {
         setUserLoggedOutMessage("");
       }, 3000);
       console.log("User logged out successfully.");
+      navigate("/");
     } catch (error) {
+      // Show the error message on the page, not only log it to the console
       console.error("Error signing out: ", error);
     }
   };
   if (loading) {
+    // It would be much better to add a loading indicator or style the loading text in someway
     return <div>Loading...</div>;
   }
 
@@ -59,6 +62,7 @@ function Header() {
           )}
         </ul>
         {userLoggedOutMessage && (
+          // The logout message is almost invisible. Use colors of higher contrast but even better add a dialog / popup element that show this success message. E.g. this one: https://headlessui.com/react/dialog
       <p className="logout-message">{userLoggedOutMessage}</p>
     )}
       </nav>

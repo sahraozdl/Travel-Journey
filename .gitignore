@@ -1,1 +1,3 @@
 node_modules
+
+# It woudl be better to use a default gitignore file (copy from lesson prijects). Right now secrets got commmited to Github. Avoid it in the future! 🙂

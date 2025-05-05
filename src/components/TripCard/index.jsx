@@ -34,8 +34,11 @@ export default function TripCard({ entry }) {
         <p className="font-light text-xs px-4">{entry.dates}</p>
         </span>
         <p className="py-4 leading-6">{entry.text}</p>
-
-        <div className="flex flex-row-reverse">
+{/* Added a bit of spacing between save and like buttons
+  Avoid using row-reverse. Instead, just change the order of the items manually here.
+*/
+}
+        <div className="flex flex-row-reverse gap-4">
   <SaveButton user={user} id={entry.id} />
   <LikeButton user={user} id={entry.id} />
 </div>
