@@ -75,6 +75,7 @@ export function AuthForm() {
         {isSignUp ? "Create Account" : "Login"}
       </button>
 
+      {/* Make sure that the error / success message is centerd and crearly visible (check accesibiliy for color contrast) */}
       {successMessage && <p className="text-yellow-700">{successMessage}</p>}
       {errorMessage && <p className="text-red-600">{errorMessage}</p>}
 

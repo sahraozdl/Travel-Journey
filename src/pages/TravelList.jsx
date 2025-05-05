@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase.js";
+// It would be better to use TripCard (name of the actual component) when importing it here. Using a different name is confusing.
 import Entry from "../components/TripCard/index.jsx";
 
 export default function TravelList() {
@@ -29,6 +30,7 @@ export default function TravelList() {
   }
   return (
     <section>
+      {/* It would be good to restrict max possible width here (on the section, for example) as it get's a bit hard to read on larger screen. */}
       {entries.map((entry) => {
         return <Entry key={entry.id} entry={entry} />;
       })}
