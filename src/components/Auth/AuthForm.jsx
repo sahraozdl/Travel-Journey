@@ -25,7 +25,8 @@ export function AuthForm() {
       setSuccessMessage(isSignUp ? "Account created!" : "Signed in!");
       setTimeout(() => navigate("/"), 1000);
     } catch (error) {
-      setErrorMessage(error.message);
+      console.error(error.message)
+      setErrorMessage("Incorrect email or password. Try again.");
     }
   };
 
@@ -75,8 +76,8 @@ export function AuthForm() {
         {isSignUp ? "Create Account" : "Login"}
       </button>
 
-      {successMessage && <p className="text-yellow-700">{successMessage}</p>}
-      {errorMessage && <p className="text-red-600">{errorMessage}</p>}
+      {successMessage && <p className="text-yellow-900 text-center">{successMessage}</p>}
+      {errorMessage && <p className="text-red-900 text-center">{errorMessage}</p>}
 
       <p className="text-sm text-center">
         {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}

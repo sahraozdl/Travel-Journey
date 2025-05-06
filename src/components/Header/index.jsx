@@ -1,34 +1,33 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { NavLink, useNavigate } from "react-router";
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { GlobeAsiaAustraliaIcon } from "@heroicons/react/24/solid";
+import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
+import { Button } from "@headlessui/react";
 
 function Header() {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [userLoggedOutMessage, setUserLoggedOutMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
-      navigate("/");
       await signOut(auth);
-      setUserLoggedOutMessage("User logged out successfully.");
+      setUserLoggedOutMessage("You have been logged out successfully.");
       setTimeout(() => {
         setUserLoggedOutMessage("");
       }, 3000);
-      console.log("User logged out successfully.");
+      navigate("/");
     } catch (error) {
       console.error("Error signing out: ", error);
     }
   };
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
+    <>
     <header className="header">
       <NavLink to="/" className="flex flex-row gap-2 items-center" end>
         <GlobeAsiaAustraliaIcon className="text-white h-12 w-12"/>
@@ -51,18 +50,53 @@ function Header() {
               </li>
               <li>
                 {/*I will remove it to the settings later no need styling*/}
-                <button className="nav-btn" onClick={handleLogout}>
+                <button className="nav-btn"
+                    onClick={() => setIsOpen(true)}>
                   Logout
                 </button>
               </li>
             </>
           )}
         </ul>
-        {userLoggedOutMessage && (
-      <p className="logout-message">{userLoggedOutMessage}</p>
-    )}
+        
       </nav>
+      
     </header>
+
+    <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="relative z-50"
+      >
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <DialogPanel className="max-w-lg space-y-4 border-4 rounded-lg  border-blue-950 bg-amber-50 p-12">
+            <DialogTitle className="font-bold text-xl text-center">You are logging out.</DialogTitle>
+            <p>Are you sure you want to log out?</p>
+            <div className="flex gap-4 justify-around">
+              <Button
+                className="rounded-3xl border-2 bg-blue-950 px-4 py-2 text-base font-semibold text-white hover:bg-red-950 active:bg-blue-950"
+                onClick={() => setIsOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                className="rounded-3xl border-2 bg-blue-950 px-4 py-2 text-base font-semibold text-white hover:bg-red-950 active:bg-blue-950"
+                onClick={() => {
+                  setIsOpen(false);
+                  handleLogout();
+                }}
+              >
+                Logout
+              </Button>
+            </div>
+          </DialogPanel>
+        </div>
+      </Dialog>
+
+    {userLoggedOutMessage && (
+      <p className="block bg logout-message">{userLoggedOutMessage}</p>
+    )}
+    </>
   );
 }
 
