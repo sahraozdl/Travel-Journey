@@ -8,7 +8,11 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext.jsx";
 
 export const useAuth = () => {
-  return useContext(UserContext);
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useAuth must be used within a UserProvider");
+  }
+  return context;
 };
 
 export async function signUpUser(email, password, username) {

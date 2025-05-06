@@ -50,16 +50,16 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, dispatch] = useReducer(userReducer, {
-    id: null,
-    name: null,
-    email: null,
+    id: "",
+    name: "",
+    email: "",
     addedTrip: [],
     savedTrips: [],
     favoriteTrip: [],
-    createdAt: null,
+    createdAt: "",
   });
 
-  const [loading, setLoading] = useState(true);
+const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (authUser) => {
@@ -91,13 +91,13 @@ export const UserProvider = ({ children }) => {
         dispatch({
           type: UserActionTypes.SetUser,
           payload: {
-            id: null,
-            name: null,
-            email: null,
+            id: "",
+            name: "",
+            email: "",
             addedTrip: [],
             savedTrips: [],
             favoriteTrip: [],
-            createdAt: null,
+            createdAt: "",
           },
         });
         setLoading(false);
@@ -108,7 +108,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, dispatch, loading }}>
+    <UserContext.Provider value={{ user, loading, dispatch }}>
       {children}
     </UserContext.Provider>
   );

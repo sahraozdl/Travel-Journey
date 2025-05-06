@@ -71,8 +71,9 @@ const SaveButton = ({ id }) => {
         ) : (
           <SaveIcon className="h-6 w-6 text-yellow-700" />
         )}
+        <p className="text-gray-600 text-sm">{saveCount}</p>
       </button>
-      <p className="text-gray-600 text-sm">{saveCount}</p>
+      
       {userMessage && <p className="text-red-800 text-base">{userMessage}</p>}
     </>
   );

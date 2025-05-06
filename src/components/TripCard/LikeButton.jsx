@@ -71,8 +71,9 @@ const LikeButton = ({ id }) => {
         ) : (
           <UnlikeHeart className="h-6 w-6 text-red-900" />
         )}
+        <p className="text-gray-600 text-sm">{likeCount}</p>
       </button>
-      <p className="text-gray-600 text-sm">{likeCount}</p>
+      
       {userMessage && <p className="text-red-800 text-base">{userMessage}</p>}
     </>
   );
