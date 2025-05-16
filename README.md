@@ -24,27 +24,27 @@ Installation;
 
 >Clone the repository:
 
--git clone https://github.com/sahraozdl/Travel-Journey.git
+>>git clone https://github.com/sahraozdl/Travel-Journey.git
 
 >Navigate to the project directory:
 
--cd Travel-Journey
+>>cd Travel-Journey
 
 >Install all dependencies:
 
--npm install
+>>npm install
 
 >Run the development server:
 
--npm start
+>>npm start
 
 >Build the project for production:
 
--npm run build
+>>npm run build
 
 >Run tests:
 
--npm test
+>>npm test
 
 Additional Notes;
 
