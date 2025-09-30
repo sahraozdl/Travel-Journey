@@ -36,7 +36,14 @@ const LocationSearch = ({ onPlaceSelected }) => {
     return () => clearInterval(interval);
   }, [onPlaceSelected]);
 
-  return <div ref={containerRef} className="w-1/2"></div>;
+  return (
+  <input
+    ref={inputRef}
+    type="text"
+    placeholder="Search for a location"
+    className="input w-full"
+  />
+);
 };
 
 export default LocationSearch;
