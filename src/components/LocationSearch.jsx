@@ -35,14 +35,16 @@ const LocationSearch = ({ onPlaceSelected }) => {
   }, [onPlaceSelected]);
 
   return (
-    <div className="w-full">
-      <input
-        ref={inputRef}
-        type="text"
-        placeholder="Search for a location"
-        className="input w-full border rounded p-2"
-      />
-    </div>
+    <div className="w-full relative z-50">
+  <input
+    ref={inputRef}
+    type="text"
+    placeholder="Search for a location"
+    className="input w-full border rounded p-2"
+    autoComplete="on"
+  />
+</div>
+
   );
 };
 
