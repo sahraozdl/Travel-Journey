@@ -13,7 +13,7 @@ const LocationSearch = ({ onPlaceSelected }) => {
         return;
       }
 
-      const autocomplete = new window.google.maps.places.Autocomplete(
+      const autocomplete = new google.maps.places.PlaceAutocompleteElement(
         containerRef.current
       );
 
