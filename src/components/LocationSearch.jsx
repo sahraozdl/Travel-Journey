@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useLoadGoogleMaps } from "./useLoadGoogleMaps";
 
 const LocationSearch = ({ onPlaceSelected }) => {
@@ -13,17 +13,17 @@ const LocationSearch = ({ onPlaceSelected }) => {
         return;
       }
 
-      const autocomplete = new google.maps.places.PlaceAutocompleteElement(
-        containerRef.current
-      );
+      const autocompleteEl = document.createElement("google-places-autocomplete");
 
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
+      autocompleteEl.addEventListener("place_changed", () => {
+        const place = autocompleteEl.getPlace();
         if (onPlaceSelected && place.place_id) {
           const mapUrl = `https://www.google.com/maps/place/?q=place_id:${place.place_id}`;
           onPlaceSelected(mapUrl);
         }
       });
+
+      containerRef.current.appendChild(autocompleteEl);
     };
 
     const interval = setInterval(() => {
@@ -36,16 +36,7 @@ const LocationSearch = ({ onPlaceSelected }) => {
     return () => clearInterval(interval);
   }, [onPlaceSelected]);
 
-  return (
-    <div className="w-1/2 ">
-      <input
-        ref={containerRef}
-        type="text"
-        placeholder="Search for a location"
-        className="input w-full"
-      />
-    </div>
-  );
+  return <div ref={containerRef} className="w-1/2"></div>;
 };
 
 export default LocationSearch;
